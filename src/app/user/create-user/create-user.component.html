@@ -1,0 +1,78 @@
+<div>
+    <nav class="navbar navbar-dark bg-primary">
+        <label style="color: #fff; margin-left: 10px;">Create User </label> <!-- Navbar content -->
+    </nav>
+      
+</div>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" style="margin: 10px">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputEmail4">Name</label>
+            <input type="text" formControlName="name" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Name is required</div>
+            </div>
+        </div>   
+        <div class="form-group col-md-6">
+            <label>Email</label>
+            <input type="text" formControlName="email" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>City</label>
+            <input type="text" formControlName="city" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+            <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                <div *ngIf="f.city.errors.required">City is required</div>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label>State</label>
+            <input type="text" formControlName="state" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
+            <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                <div *ngIf="f.state.errors.required">City is required</div>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <label>Country</label>
+            <input type="text" formControlName="country" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
+            <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                <div *ngIf="f.country.errors.required">City is required</div>
+            </div>
+        </div>
+    </div>
+    <div  class="form-row">
+        <div  formArrayName="address" class="col" >
+            
+            <div *ngFor="let adres of address.controls; let i=index">
+                <label for="adres-{{ i }}">Adress:</label>
+                <input type="text" class="form-control"  placeholder="Apartment or floor, H.No, landmark" 
+                id="adres-{{ i }}" type="text" [formControlName]="i" required>
+            </div>
+            <button class="btn btn-primary" (click)="addAlias()" style="margin-top: 10px;">+ Add another adress</button>
+        </div>
+    </div>
+  
+    <div class="form-group col-md-6" style="margin-top: 10px;
+    padding: 0px !important;">
+        <ng-multiselect-dropdown formControlName="hobbies" [placeholder]="'Select Hobbies'"
+            [settings]="dropdownSettings" [data]="dropdownList" required>
+        </ng-multiselect-dropdown>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" [disabled]="!form.valid">
+            Save
+        </button>
+        <button (click)="cancel()" class="btn btn-light">Cancel</button>
+    </div>
+</form>

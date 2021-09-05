@@ -1,0 +1,41 @@
+<div style="margin:0.5em">
+    <a routerLink="add" class="btn btn-sm btn-success mb-2">Add User</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email Id</th>
+                <th scope="col">City</th>
+                <th scope="col">State</th>
+                <th scope="col">Country</th>
+                <th scope="col">Adress</th>
+                <th scope="col">Hobbies</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users ">
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.city}}</td>
+                <td>{{user.state}}</td>
+                <td>{{user.country}}</td>
+                <td>{{user.address}}</td>
+                <td>
+                    <span *ngFor="let hobby of user.hobbies;  let i=index  ">
+                          {{hobby.hvalue}} {{i === user.hobbies.length -1 ? '' : ',&nbsp;' }}
+                    </span>
+                </td>
+                <td style="white-space: nowrap; ;">
+                    <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary " style="margin-right:1em;">Edit</a>
+                    <button (click)="cloneUser(user.id)" class="btn btn-sm btn-info" style="margin-right:1em;">Clone
+                    </button>
+                    <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user">Delete
+                    </button>
+
+                </td>
+                <!-- {{user| json}} -->
+            </tr>
+
+        </tbody>
+    </table>
+</div>
